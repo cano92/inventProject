@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/mvc
+https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	
+<!-- 	tener mucho cuidado con las anotaciones y versions que se indican No todas estan disponibles  -->
+<!-- 	https://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd -->
+	
+	<!-- base package de controlladores -->
+	<context:component-scan base-package="controllers"/>
+	<mvc:annotation-driven />
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- los views los ba a buscar aqui terminados en jsp -->
+		<property name="prefix" >
+		
+<!-- 		una vez compilado la carpeta webapp pasa a ser la raiz y /WEB-INF esta dentro  -->
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<!-- indicamos la direccion de los recursos js css img -->
+<!-- 	una vez compilado la carpeta webapp pasa a ser la raiz y se pide que busque en todo dentro de  /resources-->
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+	
+</beans>

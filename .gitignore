@@ -1,0 +1,5 @@
+/target/
+.classpath
+###> los settings son las configuraciones de eclipse, si se ignoran se deben realizar manualmente
+.settings
+.project

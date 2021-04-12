@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+<!-- 	<context:property-placeholder location="classpath:database.properties"/> -->
+	
+	<!--************ DataSource *****************-->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/citrino_DB"/>
+		
+		<property name="user" value="admin" />
+		<property name="password" value="admin"/>
+		<property name="acquireIncrement" value="2"/>
+		<property name="minPoolSize" value="2"/>
+		<property name="maxPoolSize" value="10"/>
+		<property name="maxIdleTime" value="600"/>
+	</bean>
+	
+	<!--****************  Configuración JPA ******************* -->
+	<bean id="emf"	class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		
+		<property name="dataSource" ref="dataSource" />
+		
+		<!-- paquete de los entities -->
+		<property name="packagesToScan" value="entities" />
+		
+		<!-- Seteo la implementación del EntityManager (JPA) de Hibernate -->
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+<!-- 				<prop key="hibernate.hbm2ddl.auto">update</prop> -->
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!--*********** Manejador de Transacciones *********** -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+	
+	<!-- indicamos que usamos anotaciones para el transaction-manager -->
+	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
+	
+	
+</beans>
