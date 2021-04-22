@@ -28,12 +28,11 @@ public class PermitService extends GenericService<Permit> implements IPermitServ
 		try { //busca si ya existe algun objeto con el nombre
 			boolean exitName=this.permitDao.isExistFieldName("name", entidad.getName());
 			if( !exitName)
-				this.permitDao.save(entidad);
-		
+				return this.permitDao.save(entidad);
+			return entidad;
 		} catch (PersistenceException e) {
 			throw new ServiceException(e);
 		}
-		return null;
 	}
 	
 	

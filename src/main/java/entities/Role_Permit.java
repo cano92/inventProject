@@ -1,53 +1,34 @@
 package entities;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Role_Permit {
 	
-	@Id @GeneratedValue
-	int id;
-	
-	//config si un rol se borra todas sus referencias tambien y lo mismo si un permit se borra
-	@OneToOne
-	public Role role;
-	@OneToOne
-	public Permit permit;
-	
+	//indica que clase compuesta es tomada como Id
+	@EmbeddedId
+	Role_PermitPK rolePermitPK;
+
+	//constructores
 	public Role_Permit() { }
 	
-	public Role_Permit(Role role,Permit permit) {
-		this.permit=permit;
-		this.role=role;
-	}
-
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public Permit getPermit() {
-		return permit;
-	}
-
-	public void setPermit(Permit permit) {
-		this.permit = permit;
+	public Role_Permit(Role_PermitPK role_PermitPK) {
+		this.rolePermitPK= role_PermitPK;
 	}
 	
+	public Role_Permit(Role role, Permit permit) {
+		this.rolePermitPK= new Role_PermitPK(role,permit);
+	}
+
+	//Getters Setters
+	
+	public Role_PermitPK getRolePermitPK() {
+		return rolePermitPK;
+	}
+
+	public void setRolePermitPK(Role_PermitPK rolePermitPK) {
+		this.rolePermitPK = rolePermitPK;
+	}
 	
 }

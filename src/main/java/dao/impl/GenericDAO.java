@@ -85,8 +85,7 @@ public class GenericDAO<T> implements IGenericDAO<T> {
 	@Override
 	public T update(T entidad) throws PersistenceException{
 		try{
-			this.getEntityManager().merge(entidad);
-			return entidad;
+			return this.getEntityManager().merge(entidad);
 		}catch(Exception e) {
 			throw new PersistenceException(e);
 		}
@@ -96,6 +95,7 @@ public class GenericDAO<T> implements IGenericDAO<T> {
 	public boolean delete(long id) throws PersistenceException{
 		try{			
 			T entidad = this.getByID(id);
+			
 			if (entidad != null) {
 				return this.delete(entidad);
 			}else { return false; }
@@ -107,13 +107,15 @@ public class GenericDAO<T> implements IGenericDAO<T> {
 	@Override
 	public boolean delete(T entidad) throws PersistenceException{
 		try {
-			this.getEntityManager().remove(entidad);
+			if(!this.getEntityManager().contains(entidad))
+				this.getEntityManager().remove( this.update(entidad) );
+			else
+				this.getEntityManager().remove(entidad);
 			return true;
 		}catch(Exception e) {
 			throw new PersistenceException(e);
 		}
 	}
-
 	
 	
 	

@@ -3,13 +3,13 @@ package entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
 @Entity
 public class Permit {
 	@Id @GeneratedValue
 	long id;
 	
 	String name;
+	
 	
 	public Permit() {	}
 
@@ -59,6 +59,6 @@ public class Permit {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	
 }

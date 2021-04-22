@@ -50,21 +50,43 @@ public class UserController {
 			Role dueño3 = this.roleService.save(new Role("dueño"));
 			Role empleado = this.roleService.save(new Role("empleado"));
 			Role invitado = this.roleService.save(new Role("invitado"));
-
-			//no se debe agregar dos veces el "Role_Permit"
-			this.roleService.addPermit(dueño, show);
-			this.roleService.addPermit(dueño, show);
-			this.roleService.addPermit(dueño, show);
+			
+			
+			this.roleService.addPermit(dueño, sale);
+			this.roleService.addPermit(dueño, sale);
+			this.roleService.addPermit(dueño, sale);
 			
 			this.roleService.addPermit(dueño, nuevo);
 			this.roleService.addPermit(dueño, delete);
 			this.roleService.addPermit(dueño, update);
 			this.roleService.addPermit(dueño, buy);
-			this.roleService.addPermit(dueño, sale);
+			this.roleService.addPermit(dueño, show);
 			
-			this.roleService.addPermit(empleado, show);
 			this.roleService.addPermit(empleado, sale);
-			this.roleService.addPermit(invitado, show);
+			this.roleService.addPermit(empleado, show);
+			
+			this.roleService.removePermit(empleado, show);
+			
+			
+			System.out.println("pasa");
+
+			//no se debe agregar dos veces el "Role_Permit"
+//			this.roleService.addPermit(dueño, show);
+//			this.roleService.addPermit(dueño, show);
+//			this.roleService.addPermit(dueño, show);
+//			
+//			this.roleService.addPermit(dueño, nuevo);
+//			this.roleService.addPermit(dueño, delete);
+//			this.roleService.addPermit(dueño, update);
+//			this.roleService.addPermit(dueño, buy);
+//			this.roleService.addPermit(dueño, sale);
+//			
+//			this.roleService.addPermit(empleado, show);
+//			this.roleService.addPermit(empleado, sale);
+//			this.roleService.addPermit(invitado, show);
+			
+			
+			
 			// User
 //		userService.save(new User("pep","pep","pepe","pepe", 234, "pepe@mail.com", LocalDate.of(1992, 3, 12),null ));
 //		userService.save(new User("ju","ju","juan","juan", 234, "juan@mail.com", LocalDate.of(1992, 3, 12),null ));
