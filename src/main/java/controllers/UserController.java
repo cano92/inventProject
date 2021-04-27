@@ -69,7 +69,7 @@ public class UserController {
 			
 // User
 		User pepe = userService.save(new User("pep","pep","pepe","pepe", 1234, "pepe@mail.com", LocalDate.of(1990, 1, 12)) );
-		User userInvitado = userService.save(new User("inv","inv","invitado","invitado", 2345, "invitado@mail.com", LocalDate.of(1991, 2, 12)) );
+		User userInvitado = userService.save(new User("inv","inv","pepe","pepe", 2345, "invitado@mail.com", LocalDate.of(1991, 2, 12)) );
 		User userEmpleado = userService.save(new User("emp","emp","empleado","empleadp", 3456, "empleado@mail.com", LocalDate.of(1992, 3, 12)) );
 		User userDueño = userService.save(new User("due","due","dueño","dueño",4567, "dueño@mail.com", LocalDate.of(1993, 4, 12)) );
 		
@@ -105,7 +105,7 @@ public class UserController {
 	public String showList() {
 		List<User> list;
 		try {
-			list = this.userService.findByUserName("pep");
+			list = this.userService.findByUsersFirtsName("pepe");
 			list.forEach(System.out::println);
 
 		} catch (ServiceException e) {
@@ -129,6 +129,7 @@ public class UserController {
 			
 			if( pepe.isExistPermit("product_delete")  )
 				System.out.println("el usuario tiene permiso product_delete");
+			
 			
 			System.out.println(pepe);
 		} catch (ServiceException e) {

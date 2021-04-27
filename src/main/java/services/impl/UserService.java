@@ -44,9 +44,12 @@ public class UserService extends GenericService<User> implements IUserService {
 	}
 	
 	@Override
-	public List<User> findByUserName(String name) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> findByUsersFirtsName(String name) throws ServiceException {
+		try {
+			return this.userDAO.getAllFieldName("firtsName", name);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e);
+		}
 	}
 
 	@Override
@@ -57,13 +60,6 @@ public class UserService extends GenericService<User> implements IUserService {
 			throw new ServiceException(e);
 		}
 	}
-
-	@Override
-	public List<User> getUsers(int ini, int fin)throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	public User save(User entidad) throws ServiceException {
@@ -88,6 +84,14 @@ public class UserService extends GenericService<User> implements IUserService {
 		}
 	}
 	
+	@Override
+	public List<User> getUsers(int ini, int fin)throws ServiceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 	// remove all roles..  en una consulta hql para no borrar vada rol uno por uno
+	
 
 }
