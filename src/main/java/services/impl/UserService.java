@@ -44,7 +44,7 @@ public class UserService extends GenericService<User> implements IUserService {
 	}
 	
 	@Override
-	public List<User> findByUsersFirtsName(String name) throws ServiceException {
+	public List<User> findByFirtsName(String name) throws ServiceException {
 		try {
 			return this.userDAO.getAllFieldName("firtsName", name);
 		} catch (PersistenceException e) {

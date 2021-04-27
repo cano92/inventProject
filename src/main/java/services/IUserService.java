@@ -9,7 +9,7 @@ import util.exception.ServiceException;
 public interface IUserService extends IGenericService<User>{
 	//las funciones de GenericDao se heredan
 	
-	public List<User> findByUsersFirtsName(String name) throws ServiceException;
+	public List<User> findByFirtsName(String name) throws ServiceException;
 
 	public User findByUser(String user) throws ServiceException;
 	
