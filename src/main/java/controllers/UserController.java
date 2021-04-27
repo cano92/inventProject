@@ -105,7 +105,7 @@ public class UserController {
 	public String showList() {
 		List<User> list;
 		try {
-			list = this.userService.findByUsersFirtsName("pepe");
+			list = this.userService.findByFirtsName("pepe");
 			list.forEach(System.out::println);
 
 		} catch (ServiceException e) {
