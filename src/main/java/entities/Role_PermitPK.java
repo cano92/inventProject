@@ -2,8 +2,8 @@ package entities;
 
 import java.io.Serializable;
 
+//import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
 
 @Embeddable
 public class Role_PermitPK implements Serializable{
@@ -13,26 +13,24 @@ public class Role_PermitPK implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
-	public Role roleFK;
-	@ManyToOne
-	public Permit permitFK;
+	public int roleFK;
+	//@Column(name="PermitFK")
+	public int permitFK;
 	
+	public Role_PermitPK() {}
 	
-	public Role_PermitPK() { }
-	
-	public Role_PermitPK(Role role, Permit permit) {
+	public Role_PermitPK(int roleFK, int permitFK) {
 		super();
-		this.roleFK = role;
-		this.permitFK = permit;
+		this.roleFK = roleFK;
+		this.permitFK = permitFK;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((permitFK == null) ? 0 : permitFK.hashCode());
-		result = prime * result + ((roleFK == null) ? 0 : roleFK.hashCode());
+		result = prime * result + permitFK;
+		result = prime * result + roleFK;
 		return result;
 	}
 
@@ -45,39 +43,30 @@ public class Role_PermitPK implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Role_PermitPK other = (Role_PermitPK) obj;
-		if (permitFK == null) {
-			if (other.permitFK != null)
-				return false;
-		} else if (!permitFK.equals(other.permitFK))
+		if (permitFK != other.permitFK)
 			return false;
-		if (roleFK == null) {
-			if (other.roleFK != null)
-				return false;
-		} else if (!roleFK.equals(other.roleFK))
+		if (roleFK != other.roleFK)
 			return false;
 		return true;
 	}
-
-	public Role getRole() {
+	
+	public int getRoleFK() {
 		return roleFK;
 	}
-
-	public void setRole(Role role) {
-		this.roleFK = role;
+	public void setRoleFK(int roleFK) {
+		this.roleFK = roleFK;
 	}
-
-	public Permit getPermit() {
+	public int getPermitFK() {
 		return permitFK;
 	}
-
-	public void setPermit(Permit permit) {
-		this.permitFK = permit;
+	public void setPermitFK(int permitFK) {
+		this.permitFK = permitFK;
 	}
-
 	@Override
 	public String toString() {
-		return "Role_PermitPK [role=" + roleFK + ", permit=" + permitFK + "]";
+		return "Role_PermitPK [roleFK=" + roleFK + ", permitFK=" + permitFK + "]";
 	}
 	
+
 	
 }

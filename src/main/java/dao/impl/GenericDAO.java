@@ -34,17 +34,45 @@ public class GenericDAO<T> implements IGenericDAO<T> {
 	 * se le debe indicar el nombre del atributo a buscar where
 	 * el campo de la tabla en la que busca es "fieldName"
 	 * */
+	@Override
 	public boolean isExistFieldName(String fieldName, String findName) throws PersistenceException{
-		try{
-			//example UserHql ="from User as us where us.firtsName=:UserName";
+		try{ //example UserHql ="from User as us where us.firtsName=:UserName";
+			
 			String hql="from "+this.getEntityName()+" as Entity where Entity."+fieldName+"='"+findName+"'";
 	
 			List<T> list=this.getEntityManager().createQuery(hql,this.getPersistentClass())
 					.setMaxResults(1)
 					.getResultList();
+			return list.isEmpty()? false: true;
 			
-			if(list.size() == 0) return false;
-			return true;
+		}catch(Exception e) {
+			throw new PersistenceException(e);
+		}
+	}
+	
+	@Override
+	public T getFirstFieldName(String fieldName, String findName) throws PersistenceException {
+		try{ //example UserHql ="from User as us where us.firtsName=:UserName";
+			
+			String hql="from "+this.getEntityName()+" as Entity where Entity."+fieldName+"='"+findName+"'";
+	
+			List<T> list=this.getEntityManager().createQuery(hql,this.getPersistentClass())
+					.setMaxResults(1)
+					.getResultList();
+			return list.isEmpty()? null: list.get(0);
+			
+		}catch(Exception e) {
+			throw new PersistenceException(e);
+		}
+	}
+	
+	@Override
+	public List<T> getAllFieldName(String fieldName, String findName) throws PersistenceException{
+		try{	//example UserHql ="from User as us where us.firtsName=:UserName";
+			String hql="from "+this.getEntityName()+" as Entity where Entity."+fieldName+"='"+findName+"'";
+	
+			return this.getEntityManager().createQuery(hql,this.getPersistentClass()).getResultList();
+			
 		}catch(Exception e) {
 			throw new PersistenceException(e);
 		}
@@ -76,7 +104,7 @@ public class GenericDAO<T> implements IGenericDAO<T> {
 	public T save(T entidad) throws PersistenceException{
 		try {			
 			this.getEntityManager().persist(entidad);
-			return entidad;
+			return entidad; // entidad retorna con ID generado tras el persist
 		}catch(Exception e) {
 			throw new PersistenceException(e);
 		}
@@ -137,5 +165,6 @@ public class GenericDAO<T> implements IGenericDAO<T> {
 	public void setPersistentClass(Class<T> persistentClass) {
 		this.persistentClass = persistentClass;
 	}
+
 	
 }

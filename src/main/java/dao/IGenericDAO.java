@@ -19,9 +19,12 @@ public interface IGenericDAO<T> {
 	boolean delete( T entidad ) throws PersistenceException;
 	
 	/**
-	 *  ajaja
+	 *  extra..
 	 *  */
 	boolean isExistFieldName(String fieldName, String findName) throws PersistenceException;
 
+	T getFirstFieldName(String fieldName, String findName) throws PersistenceException;
+	
+	List<T> getAllFieldName(String fieldName, String findName) throws PersistenceException;
 
 }

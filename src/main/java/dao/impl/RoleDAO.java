@@ -16,4 +16,6 @@ public class RoleDAO extends GenericDAO<Role> implements IRoleDAO{
 
 	//agregar un permiso al Rol
 	
+	
+	
 }

@@ -1,41 +1,45 @@
 package entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	long id;
-	
+
 	String user;
 	String password;
-	
+
 	String firtsName;
 	String lastName;
 	int dni;
 	String mail;
-	//fecha de nacimiento
+	// fecha de nacimiento
 	LocalDate dateOfBirth;
 	String gender;
-	//por defeault en OneToOne es EAGER se usa LAZY porque no es necesario que el rol y la lista de permisos vengan siempre
-	@OneToOne(fetch=FetchType.LAZY, cascade= {CascadeType.ALL})
-	Role role;
-	
 
-	
-	//constructor
-	public User() { }
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	Set<User_Role> roles = new HashSet<User_Role>();
+
+//	.. construct
+
+	public User() {
+	}
 
 	public User(String user, String password, String firtsName, String lastName, int dni, String mail,
-			LocalDate dateOfBirth, Role role) {
+			LocalDate dateOfBirth) {
 		super();
 		this.user = user;
 		this.password = password;
@@ -44,9 +48,7 @@ public class User {
 		this.dni = dni;
 		this.mail = mail;
 		this.dateOfBirth = dateOfBirth;
-		this.role= role;
 	}
-
 
 	public User(String firtsName, String lastName, int dni, LocalDate dateOfBirth) {
 		super();
@@ -56,35 +58,40 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", user=" + user + ", password=" + password + ", firtsName=" + firtsName
-				+ ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + "]";
+//	.. Methods
+	
+	public void addRole(Role role) {
+		this.getRoles().add(new User_Role(this, role));
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
+	public User_Role removeRole(Role role) {
+		User_Role userRole = this.getUserRole(role);
+		this.getRoles().remove(userRole);
+		return userRole;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (id != other.id)
-			return false;
-		return true;
+	public void removeRole(User_Role userRole) {
+		this.getRoles().remove(userRole);
 	}
 
+	public User_Role getUserRole(Role role) {
+		Optional<User_Role> optUserRole = this.getRoles().stream()
+				.filter(userRole -> userRole.getRole().equals(role))
+				.findFirst();
+		return optUserRole.isPresent()?optUserRole.get():null;
+	}
+	
+	//buscar role y buscar permit..
+	public boolean isExistRole(String roleName) {
+		return this.getRoles().stream().anyMatch( userRole-> userRole.getRole().getName().equals(roleName) );
+	}
+	
+	public boolean isExistPermit( String permitName) {
+		return this.getRoles().stream().anyMatch( userRole->userRole.getRole().isExistPermit(permitName) );
+	}
+	
+//	.. Gets and Sets
+	
 	public long getId() {
 		return id;
 	}
@@ -157,12 +164,40 @@ public class User {
 		this.gender = gender;
 	}
 
-	public Role getRole() {
-		return role;
+	public Set<User_Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<User_Role> roles) {
+		this.roles = roles;
 	}
 	
-	public void setRole(Role role) {
-		this.role = role;
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", user=" + user + ", password=" + password + ", firtsName=" + firtsName
+				+ ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + "]";
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
 }

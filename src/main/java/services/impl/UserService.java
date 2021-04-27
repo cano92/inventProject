@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.IUserDAO;
+import dao.IUser_RoleDAO;
 import dao.impl.GenericDAO;
+import entities.Role;
 import entities.User;
+import entities.User_Role;
 import services.IUserService;
 import util.exception.PersistenceException;
 import util.exception.ServiceException;
@@ -20,6 +23,9 @@ public class UserService extends GenericService<User> implements IUserService {
 	@Autowired
 	private IUserDAO userDAO;
 	
+	@Autowired
+	private IUser_RoleDAO userRoleDAO;
+	
 	@Override
 	@SuppressWarnings("unchecked")
 	public GenericDAO<User> getDaoRepository() {	
@@ -27,6 +33,15 @@ public class UserService extends GenericService<User> implements IUserService {
 	}
 	
 	//>>>> add servicios no genericos
+	
+	public User addRole(User user, Role role ) throws ServiceException{
+		try {
+			user.addRole(role);
+			return this.userDAO.update(user);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e);
+		}
+	}
 	
 	@Override
 	public List<User> findByUserName(String name) throws ServiceException {
@@ -49,11 +64,30 @@ public class UserService extends GenericService<User> implements IUserService {
 		return null;
 	}
 
+
 	@Override
 	public User save(User entidad) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		try {		//no se puede guardar usuarios repetidos 
+			boolean exist = this.userDAO.isExistFieldName("user", entidad.getUser());
+			if(!exist)
+				return this.userDAO.save(entidad);
+			return entidad;
+		} catch (PersistenceException e) {
+			throw new ServiceException(e);
+		}
 	}
 	
+	@Override
+	public void removeRole(User user, Role role) throws ServiceException {
+		try {	
+			User_Role userRole = user.removeRole(role);
+			
+			this.userRoleDAO.delete( userRole );
+		} catch (PersistenceException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	// remove all roles..  en una consulta hql para no borrar vada rol uno por uno
 
 }

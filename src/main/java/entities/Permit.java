@@ -6,7 +6,7 @@ import javax.persistence.Id;
 @Entity
 public class Permit {
 	@Id @GeneratedValue
-	long id;
+	int id;
 	
 	String name;
 	
@@ -44,11 +44,11 @@ public class Permit {
 		return "Permit [id=" + id + ", name=" + name + "]";
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

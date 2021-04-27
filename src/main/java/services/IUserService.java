@@ -2,6 +2,7 @@ package services;
 
 import java.util.List;
 
+import entities.Role;
 import entities.User;
 import util.exception.ServiceException;
 
@@ -14,4 +15,5 @@ public interface IUserService extends IGenericService<User>{
 	
 	public List<User> getUsers(int ini,int fin) throws ServiceException;
 
+	public void removeRole(User user, Role role) throws ServiceException;
 }

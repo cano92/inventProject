@@ -1,8 +1,12 @@
 package entities;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -11,11 +15,12 @@ import javax.persistence.OneToMany;
 public class Role {
 
 	@Id @GeneratedValue
-	long id;
+	int id;
 	String name;
 	
-	@OneToMany()
-	List<Role_Permit> permits;
+	//el dueño de la relacion es role_Permit
+	@OneToMany(mappedBy="role", cascade= {CascadeType.ALL}, fetch=FetchType.EAGER )
+	Set<Role_Permit> permits=new HashSet<Role_Permit>();
 	
 	//Construct
 	public Role() { }
@@ -23,6 +28,39 @@ public class Role {
 	public Role(String name) {
 		this.name = name;
 	}
+	
+//	.. methods
+	
+	public void addPermit(Permit permit) {
+		this.permits.add(new Role_Permit(this,permit));
+	}
+	
+	public void addPermit(Role_Permit rp) {
+		this.permits.add(rp);
+	}
+	
+	public Role_Permit removePermit(Permit permit) {
+		Role_Permit rolePermit = this.getRolePermit(permit);
+		this.permits.remove(rolePermit);
+		return rolePermit;
+	}
+	
+	public void removeAllPermit() {
+		this.permits=new HashSet<Role_Permit>();
+	}
+	
+	public Role_Permit getRolePermit(Permit permit) {
+		Optional<Role_Permit> optRP = this.permits.stream()
+				.filter( rp->rp.getPermit().equals(permit) )
+				.findFirst();
+		return optRP.isPresent()?optRP.get():null;
+	}
+	
+	public boolean isExistPermit(String permitName) {
+		return this.permits.stream().anyMatch(rolePermit->rolePermit.getPermit().getName().equals(permitName));
+	}
+	
+	
 	
 	@Override
 	public String toString() {
@@ -51,11 +89,11 @@ public class Role {
 		return true;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -67,11 +105,11 @@ public class Role {
 		this.name = name;
 	}
 
-	public List<Role_Permit> getPermits() {
+	public Set<Role_Permit> getPermits() {
 		return permits;
 	}
 
-	public void setPermits(List<Role_Permit> permits) {
+	public void setPermits(Set<Role_Permit> permits) {
 		this.permits = permits;
 	}
 
