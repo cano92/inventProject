@@ -21,7 +21,7 @@ public abstract class GenericService<T> implements IGenericService<T>{
 	}
 
 	@Override
-	public T getByID(long id) throws ServiceException{
+	public T getByID(int id) throws ServiceException{
 		try {
 			return this.getDaoRepository().getByID(id);
 		} catch (PersistenceException e) {
@@ -50,7 +50,7 @@ public abstract class GenericService<T> implements IGenericService<T>{
 	}
 
 	@Override
-	public boolean delete(long id) throws ServiceException{
+	public boolean delete(int id) throws ServiceException{
 		try {
 			return this.getDaoRepository().delete(id);
 		} catch (PersistenceException e) {

@@ -1,11 +1,14 @@
 package dao.impl;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 
 import dao.IRoleDAO;
 import entities.Role;
 
 @Repository
+@Transactional
 public class RoleDAO extends GenericDAO<Role> implements IRoleDAO{
 
 	public RoleDAO() {

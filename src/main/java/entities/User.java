@@ -11,13 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
 
 	@Id
 	@GeneratedValue
-	long id;
+	int id;
 
 	String user;
 	String password;
@@ -28,7 +29,9 @@ public class User {
 	String mail;
 	// fecha de nacimiento
 	LocalDate dateOfBirth;
-	String gender;
+	
+	@OneToOne
+	Gender gender;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	Set<User_Role> roles = new HashSet<User_Role>();
@@ -39,7 +42,7 @@ public class User {
 	}
 
 	public User(String user, String password, String firtsName, String lastName, int dni, String mail,
-			LocalDate dateOfBirth) {
+			LocalDate dateOfBirth,Gender gender) {
 		super();
 		this.user = user;
 		this.password = password;
@@ -48,6 +51,7 @@ public class User {
 		this.dni = dni;
 		this.mail = mail;
 		this.dateOfBirth = dateOfBirth;
+		this.gender = gender;
 	}
 
 	public User(String firtsName, String lastName, int dni, LocalDate dateOfBirth) {
@@ -73,6 +77,10 @@ public class User {
 	public void removeRole(User_Role userRole) {
 		this.getRoles().remove(userRole);
 	}
+	
+	public void removeAllRoles() {
+		this.setRoles( new HashSet<User_Role>() );
+	}
 
 	public User_Role getUserRole(Role role) {
 		Optional<User_Role> optUserRole = this.getRoles().stream()
@@ -92,11 +100,11 @@ public class User {
 	
 //	.. Gets and Sets
 	
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -156,11 +164,11 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 

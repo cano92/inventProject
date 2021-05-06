@@ -9,13 +9,13 @@ public interface IGenericService<T> {
 
 	List<T> getAll() throws ServiceException ;
 	
-	T getByID(long id) throws ServiceException;
+	T getByID(int id) throws ServiceException;
 	
 	T save(T entidad) throws ServiceException;
 	
 	T update(T entidad) throws ServiceException;
 	
-	boolean delete( long id ) throws ServiceException;
+	boolean delete( int id ) throws ServiceException;
 	
 	boolean delete( T entidad ) throws ServiceException;
 	

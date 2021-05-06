@@ -16,4 +16,7 @@ public interface IUserService extends IGenericService<User>{
 	public List<User> getUsers(int ini,int fin) throws ServiceException;
 
 	public void removeRole(User user, Role role) throws ServiceException;
+	
+	public void removeAllRoles(User user) throws ServiceException;
+	
 }

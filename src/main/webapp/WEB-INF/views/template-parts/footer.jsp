@@ -12,12 +12,3 @@
 	</div>
 
 </footer>
-
-</div>
-<!-- final del contenedor principal -->
-</body>
-
-<!--********  include JS librerias ******* -->
-<%@ include file="jsLibraries.jsp"%>
-
-</html>

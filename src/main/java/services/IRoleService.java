@@ -6,10 +6,10 @@ import util.exception.ServiceException;
 
 public interface IRoleService extends IGenericService<Role>{
 	
-	public boolean addPermit(Role role,Permit permit ) throws ServiceException;
+	public Role addPermit(Role role,Permit permit ) throws ServiceException;
 
-	public boolean removePermit(Role role, Permit permit) throws ServiceException;
+	public Role removePermit(Role role, Permit permit) throws ServiceException;
 	
-	public boolean removePermitAll( Role role )throws ServiceException;
+	public Role removeAllPermit( Role role )throws ServiceException;
 	
 }

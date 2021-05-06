@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.IPermitDAO;
+import dao.IRole_PermitDAO;
 import dao.impl.GenericDAO;
 import entities.Permit;
 import services.IPermitService;
@@ -15,6 +16,8 @@ public class PermitService extends GenericService<Permit> implements IPermitServ
 
 	@Autowired
 	private IPermitDAO permitDao;
+	@Autowired
+	private IRole_PermitDAO role_permitDao;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -29,13 +32,22 @@ public class PermitService extends GenericService<Permit> implements IPermitServ
 			boolean exitName=this.permitDao.isExistFieldName("name", entidad.getName());
 			if( !exitName)
 				return this.permitDao.save(entidad);
-			return entidad;
+			return null;
 		} catch (PersistenceException e) {
 			throw new ServiceException(e);
 		}
 	}
 	
-	
-	
+	@Override
+	public boolean delete(Permit permit) throws ServiceException{
+		
+		try { //elimina el permit y todas las referencias al permits
+			this.role_permitDao.removeAllRole(permit);
+			super.delete(permit);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e);
+		}
+		return true;
+	}
 	
 }

@@ -1,10 +1,7 @@
-
 <!-- include head ( contiene librerias css y encabezados ) -->
-<%@ include file="head.jsp"%>
-
-<%@ include file="header.jsp"%>
-
-<%@ include file="navBar.jsp"%>
+<%-- <%@ include file="template-parts/head.jsp"%> --%>
+<%@ include file="template-parts/header.jsp"%>
+<%@ include file="template-parts/navBar.jsp"%>
 
 <!-- contenido -->
 
@@ -49,6 +46,5 @@
 
 
 
-
 <!-- include footer jsp (incluye librerias js) -->
-<%@ include file="footer.jsp"%>
+<%@ include file="template-parts/footer.jsp"%>

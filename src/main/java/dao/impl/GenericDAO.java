@@ -89,7 +89,7 @@ public class GenericDAO<T> implements IGenericDAO<T> {
 	}
 
 	@Override
-	public T getByID(long id) throws PersistenceException{
+	public T getByID(int id) throws PersistenceException{
 		try{ //retorna null si el ID no existe
 			if(id > 0) //cuando Id es menor a cero falla
 				return this.getEntityManager().find(this.getPersistentClass(), id);
@@ -120,7 +120,7 @@ public class GenericDAO<T> implements IGenericDAO<T> {
 	}
 
 	@Override
-	public boolean delete(long id) throws PersistenceException{
+	public boolean delete(int id) throws PersistenceException{
 		try{			
 			T entidad = this.getByID(id);
 			

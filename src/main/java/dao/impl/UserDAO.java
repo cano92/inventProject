@@ -28,10 +28,6 @@ public class UserDAO  extends GenericDAO<User> implements IUserDAO    {
 		try{						
 			String hql="from User as user where user.firtsName=:UserName";
 			
-			//paso a paso
-//			Query query=this.getEntityManager().createQuery(hql);
-//			query.setParameter("UserName",name);
-//			return query.getResultList();
 			return this.getEntityManager().createQuery(hql, User.class).setParameter("UserName",name).getResultList();
 		
 		}catch(Exception e) {
@@ -47,16 +43,6 @@ public class UserDAO  extends GenericDAO<User> implements IUserDAO    {
 		}catch(NoResultException e) {
 			System.out.println("el User Buscado no se encuentra registrado");
 			return null;	 
-		}catch(Exception e) {
-			throw new PersistenceException(e);
-		}
-	}
-	
-	public User findByUser2(String name) throws PersistenceException {
-		try{	//tambien se puede armar la consulta concatenando String
-			String hql="from User as us where us.user='"+name+"'";
-			//se le indica la User.class para que el objeto de la consulta sea casteada
-			return this.getEntityManager().createQuery(hql, User.class).getSingleResult();
 		}catch(Exception e) {
 			throw new PersistenceException(e);
 		}

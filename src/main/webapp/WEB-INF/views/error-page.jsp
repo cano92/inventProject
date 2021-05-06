@@ -1,10 +1,8 @@
 
 <!-- include head ( contiene librerias css y encabezados ) -->
-<%@ include file="head.jsp"%>
-
-<%@ include file="header.jsp"%>
-
-<%@ include file="navBar.jsp"%>
+<%-- <%@ include file="template-parts/head.jsp"%> --%>
+<%@ include file="template-parts/header.jsp"%>
+<%@ include file="template-parts/navBar.jsp"%>
 
 <!-- contenido -->
 
@@ -13,18 +11,12 @@
 <div class="container px-lg-5">
 	<div class="row mx-lg-n5">
 		<div class="col py-3 px-lg-5">
-			<h4>plantilla</h4>
+			<h4>Error</h4>
 		</div>
 	</div>
 </div>
 
-<!-- ***************** CONTENIDO	**************************--->
-
-
-
-
 
 
 <!-- include footer jsp (incluye librerias js) -->
-<%@ include file="footer.jsp"%>
-
+<%@ include file="template-parts/footer.jsp"%>

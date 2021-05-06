@@ -35,7 +35,7 @@ public class UserService extends GenericService<User> implements IUserService {
 	//>>>> add servicios no genericos
 	
 	public User addRole(User user, Role role ) throws ServiceException{
-		try {
+		try { // si el Rol no existe lo crea por el cascade
 			user.addRole(role);
 			return this.userDAO.update(user);
 		} catch (PersistenceException e) {
@@ -67,7 +67,7 @@ public class UserService extends GenericService<User> implements IUserService {
 			boolean exist = this.userDAO.isExistFieldName("user", entidad.getUser());
 			if(!exist)
 				return this.userDAO.save(entidad);
-			return entidad;
+			return null;
 		} catch (PersistenceException e) {
 			throw new ServiceException(e);
 		}
@@ -90,8 +90,15 @@ public class UserService extends GenericService<User> implements IUserService {
 		return null;
 	}
 
-	
-	// remove all roles..  en una consulta hql para no borrar vada rol uno por uno
-	
+	// remove all roles..  en una consulta hql para no borrar cada rol uno por uno
+	@Override
+	public void removeAllRoles(User user) throws ServiceException{
+		try { //user remove roles
+			user.removeAllRoles();
+			this.userRoleDAO.removeAllRoles(user);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e);
+		}
+	}
 
 }
