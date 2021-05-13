@@ -3,10 +3,14 @@
 
 
 
+
 <rapid:override name="page-content">
-	<h4>contenido de home</h4>
-		
+	<h4>contenido de home User</h4>
+	
+	
 	
 </rapid:override>
+
+
 
 <%@ include file="template/homeTemplate.jsp"%>

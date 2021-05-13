@@ -1,16 +1,24 @@
 package entities.app;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import entities.User;
 
+@Entity
 public class Post {
-
+	@Id @GeneratedValue
 	int id;
 
+	@OneToOne
 	User author;
 
 	String title;
 	String description;
 
+	@OneToOne
 	Topic topic;
 
 //	Constructs

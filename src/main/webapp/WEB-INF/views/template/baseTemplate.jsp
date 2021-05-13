@@ -6,15 +6,18 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- usar path relativos para evitar ruta completa -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+	
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css">
 
+<title>inventProj</title>
 </head>
 <body>
 
@@ -25,8 +28,8 @@
 		</rapid:block>
 
 	</div>
-	
-	
+
+
 	<!--********  include JS librerias ******* -->
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.slim.min.js"

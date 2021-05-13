@@ -2,7 +2,6 @@
 <!-- include head ( contiene librerias css y encabezados ) -->
 <%-- <%@ include file="template-parts/head.jsp"%> --%>
 <%@ include file="template-parts/header.jsp"%>
-<%@ include file="template-parts/navBar.jsp"%>
 
 <!-- contenido -->
 

@@ -5,16 +5,13 @@
 
 <rapid:override name="body-content">
 
-	<%@ include file="../template-parts/header.jsp"%>
-	<%@ include file="../template-parts/navBar/navBar.jsp"%>
-	
-	<!-- 	sideBar barra lateral opcional -->
-	
+	<%@ include file="../template-parts/header.jsp"%>	
+
 	<rapid:block name="page-content">
  		Here is the content
 	</rapid:block>
 
-	<%@ include file="../template-parts/footer.jsp"%>
+
 </rapid:override>
 
 <!-- ... reescribe el baseTemplate ...  -->

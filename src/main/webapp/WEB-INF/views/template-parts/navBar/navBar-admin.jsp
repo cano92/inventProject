@@ -18,7 +18,7 @@
                     </li>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Actividades
+                        Post
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="novedades.html">Novedades</a>
@@ -30,40 +30,27 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Programa
+                          Usuarios
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="programaProximo.html">Proximo</a>
-                          <a class="dropdown-item" href="programaEstimaciones.html">Estimaciones</a>
+                          <a class="dropdown-item" href="programaProximo.html">Roles</a>
+                          <a class="dropdown-item" href="programaEstimaciones.html">Buscador</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="programaTodos.html">Todos</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
+            
+            		<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Users
+                          Admin
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="listUsuario.html">Discipuladores</a>
-                          <a class="dropdown-item" href="#">Discipulos</a>
-                          <a class="dropdown-item" href="#">Visitantes</a>
-                          <a class="dropdown-item" href="#">Encargados</a>
+                          <a class="dropdown-item" href="programaProximo.html">Roles</a>
+                          <a class="dropdown-item" href="programaEstimaciones.html">Permisos</a>
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Todos</a>
+                          <a class="dropdown-item" href="programaTodos.html">Todos</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Utils
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="#">Programa Semanal</a>
-                          <a class="dropdown-item" href="#"> Articulos</a>
-                          <a class="dropdown-item" href="#"> Caledario</a>
-                          <a class="dropdown-item" href="#"> Usuarios </a>
-                          <a class="dropdown-item" href="#"> Generador Autorizaciones </a>
-                        </div>
-                      </li>
                     <li class="nav-item">
                       <a class="nav-link" href="info" tabindex="-1" aria-disabled="true">Info</a>
                     </li>

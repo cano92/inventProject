@@ -1,52 +1,50 @@
-<!-- include head ( contiene librerias css y encabezados ) -->
-<%-- <%@ include file="template-parts/head.jsp"%> --%>
-<%@ include file="template-parts/header.jsp"%>
-<%@ include file="template-parts/navBar.jsp"%>
-
-<!-- contenido -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="rapid" uri="http://www.rapid-framework.org.cn/rapid"%>
 
 
-<!--  indicador de en que parte del menu estamos-->
-<div class="container px-lg-5">
-	<div class="row mx-lg-n5">
-		<div class="col py-3 px-lg-5">
-			<h4>login</h4>
-		</div>
-	</div>
-</div>
 
-<!-- ***************** CONTENIDO	**************************--->
-<div class="container">
+<rapid:override name="page-content">
+	<!-- ***************** CONTENIDO	**************************--->
+	<!-- 	la primer seccion es el row para ocupar todo el espacio -->
 	<section class="row justify-content-center">
 
-		<article class="col-4">
-			
-			<form action="" method="post">
-				<div class="form-group">
-					<label for="exampleInputEmail1">Name</label> <input required
-						type="text" name="name" class="form-control"
-						placeholder="Enter User Name">
+		<article class="col-5 loginForm">
+			<header class="row">
+				<div class="col">
+					<h3>Login.!</h3>
 				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Password</label> <input required
-						type="text" name="password" class="form-control"
-						placeholder="Password">
+			</header>
+			<section class="row">
+				<div class="col">
+					<form action="" method="post">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Name</label> <input required
+								type="text" name="name" class="form-control"
+								placeholder="Enter User Name">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Password</label> <input
+								required type="text" name="password" class="form-control"
+								placeholder="Password">
+						</div>
+					</form>
 				</div>
-				<div class="text-center">
+			</section>
+			<footer class="row">
+				<div class="col text-center">
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>
-
-			</form>
-
+			</footer>
 		</article>
 
 	</section>
-</div>
+</rapid:override>
 
 
 
+<%@ include file="template/clearTemplate.jsp"%>
 
 
-<!-- include footer jsp (incluye librerias js) -->
-<%@ include file="template-parts/footer.jsp"%>
+
 

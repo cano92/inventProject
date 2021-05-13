@@ -1,11 +1,11 @@
 
 <!--es la cabezera de la pagina-->
-<header class="row">
+<header class="row header-page">
 	<div class="col">
 
 		<!--elementod de cabezera-->
 
-		<h1>Cabezera de pag</h1>
+		<h2>Bienvenido InventProj</h2>
 
 
 	</div>
