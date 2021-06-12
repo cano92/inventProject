@@ -42,82 +42,114 @@ public class DefaultRestController {
 	public String showIni(Model model) {
 		try {
 //new Permit			 no debe repetir el mismo Permiso
-			Permit show = permitService.save(new Permit("product_show"));
-			permitService.save(new Permit("product_show"));
+			Permit pShow = permitService.save(new Permit("post_show","permite al usuario ver los post"));
+			Permit pNuevo = permitService.save(new Permit("post_new","permite al usuario agregar nuevos los post"));
+			Permit pDelete = permitService.save(new Permit("post_delete","permite al usuario borrar post"));
+			Permit pUpdate = permitService.save(new Permit("post_update","permite al usuario editar post"));
 			
-			Permit nuevo = permitService.save(new Permit("product_new"));
-			Permit delete = permitService.save(new Permit("product_delete"));
-			Permit update = permitService.save(new Permit("product_update"));
-			Permit buy = permitService.save(new Permit("product_buy"));
-			Permit sale = permitService.save(new Permit("product_sale"));
+			Permit tShow = permitService.save(new Permit("topic_show"));
+			Permit tNuevo = permitService.save(new Permit("topic_new"));
+			Permit tDelete = permitService.save(new Permit("topic_delete"));
+			Permit tUpdate = permitService.save(new Permit("topic_update"));
+			
+			Permit uShow = permitService.save(new Permit("user_show"));
+			Permit uNuevo = permitService.save(new Permit("user_new"));
+			Permit uDelete =permitService.save(new Permit("user_delete"));
+			Permit uUpdate =permitService.save(new Permit("user_update"));
 
+			Permit rShow = permitService.save(new Permit("role_show"));
+			Permit rNuevo = permitService.save(new Permit("role_new"));
+			Permit rDelete =permitService.save(new Permit("role_delete"));
+			Permit rUpdate =permitService.save(new Permit("role_update"));
+			
+			//opcionales 
+			Permit peShow = permitService.save(new Permit("permit_show"));
+			Permit peNuevo = permitService.save(new Permit("permit_new"));
+			Permit peDelete =permitService.save(new Permit("permit_delete"));
+			Permit peUpdate =permitService.save(new Permit("permit_update"));
+			
+			Permit geShow = permitService.save(new Permit("gender_show"));
+			Permit geNuevo = permitService.save(new Permit("gender_new"));
+			Permit geDelete =permitService.save(new Permit("gender_delete"));
+			Permit geUpdate =permitService.save(new Permit("gender_update"));
+			
 //new Roles			 no debe repetirse el mismo Rol
-			Role dueño = this.roleService.save(new Role("dueño"));
-			this.roleService.save(new Role("dueño"));
-			Role empleado = this.roleService.save(new Role("empleado"));
-			Role invitado = this.roleService.save(new Role("invitado"));
+			Role user = this.roleService.save(new Role("user","Rol user se encuentra limitado a las funciones basicas de la app "));
+			this.roleService.save(new Role("user"));
+			Role admin = this.roleService.save(new Role("admin","el Rol Administrador lleva todos los permisos y no tiene limite en las acciones"));
 			
 //add role Permit			no debe repetirse el mismo permiso
 			//ojo no usar un objeto no actualizado
-			dueño=this.roleService.addPermit(dueño, show);
-			dueño=this.roleService.addPermit(dueño, nuevo);
-			dueño=this.roleService.addPermit(dueño, delete);
-			dueño=this.roleService.addPermit(dueño, update);
-			dueño=this.roleService.addPermit(dueño, buy);
-			dueño=this.roleService.addPermit(dueño, sale);
+			user=this.roleService.addPermit(user, pShow);
+			user=this.roleService.addPermit(user, pNuevo);
+			user=this.roleService.addPermit(user, pDelete);
+			user=this.roleService.addPermit(user, pUpdate);
 			
-			invitado.addPermit(show);
-			invitado=this.roleService.update(invitado);
+			user=this.roleService.addPermit(user, uShow);
+			user=this.roleService.addPermit(user, tShow);
+			user=this.roleService.addPermit(user, rShow);
 			
-			empleado.addPermit(show);
-			empleado.addPermit(show);
-			empleado.addPermit(sale);
-			empleado.addPermit(delete);
-			empleado = this.roleService.update(empleado);
+			admin.addPermit(pShow);
+			admin.addPermit(pNuevo);
+			admin.addPermit(pDelete);
+			admin.addPermit(pUpdate);
 			
-			empleado=this.roleService.removePermit(empleado, delete);
-			//hay un problema al eliminar  el permit.. en BD se elimina pero despues lo busca como si el objeto quedara viejo
-//			empleado = this.roleService.update(empleado);
-
+			admin.addPermit(tShow);
+			admin.addPermit(tNuevo);
+			admin.addPermit(tDelete);
+			admin.addPermit(tUpdate);
 			
-//			removes
-			//empleado=this.roleService.removeAllPermit(dueño);
-			//this.permitService.delete(show);
-			//this.roleService.delete(dueño);
+			admin.addPermit(uShow);
+			admin.addPermit(uNuevo);
+			admin.addPermit(uDelete);
+			admin.addPermit(uUpdate);
+			
+			admin.addPermit(rShow);
+			admin.addPermit(rNuevo);
+			admin.addPermit(rDelete);
+			admin.addPermit(rUpdate);
+			
+			admin.addPermit(peShow);
+			admin.addPermit(peNuevo);
+			admin.addPermit(peDelete);
+			admin.addPermit(peUpdate);
+			
+			admin.addPermit(geShow);
+			admin.addPermit(geNuevo);
+			admin.addPermit(geDelete);
+			admin.addPermit(geUpdate);
+			admin = this.roleService.update(admin);
+			
 //	Gender
 		Gender masculino = this.genderService.save(new Gender("Masculino"));
 		Gender femenino = this.genderService.save(new Gender("Femenino"));
 			
 // User
 		User pepe = userService.save(new User("pep","pep","pepe","pepe", 1234, "pepe@mail.com", LocalDate.of(1990, 1, 12), masculino));
-		User userInvitado = userService.save(new User("inv","inv","pepe","pepe", 2345, "invitado@mail.com", LocalDate.of(1991, 2, 12), masculino));
-		User userEmpleado = userService.save(new User("emp","emp","empleado","empleadp", 3456, "empleado@mail.com", LocalDate.of(1992, 3, 12), femenino));
-		User userDueño = userService.save(new User("due","due","dueño","dueño",4567, "dueño@mail.com", LocalDate.of(1993, 4, 12), masculino));
+		User userInvitado = userService.save(new User("inv","inv","alguien","alguien", 2345, "invitado@mail.com", LocalDate.of(1991, 2, 12), femenino));
+		User userAdmin = userService.save(new User("admin","admin","admin","admin",4567, "admin@mail.com", LocalDate.of(1993, 4, 12), masculino));
 		
-// Add user roles		
-//		empleado=this.roleService.getByID(8);
-		pepe.addRole(empleado);
-		pepe.addRole(empleado);
-		pepe.addRole(invitado);
-		User pepeAct = this.userService.update(pepe);
+// Add user Roles		
+
+		userAdmin.addRole(admin);
+		userAdmin.addRole(user);
+		userAdmin = this.userService.update(userAdmin);
 		
-		//el Id de user es simple... no los tienen hasta despues de realizar el persist..
-		//por eso se usa una entitdad actualizada para eliminar un rol
-		this.userService.removeRole(pepeAct, empleado);
+		pepe.addRole(user);
+		pepe = this.userService.update(pepe);
 		
-		userInvitado.addRole(invitado);
-		this.userService.update(userInvitado);
+		userInvitado.addRole(user);
+		userInvitado = this.userService.update(userInvitado);
 		
-		userEmpleado.addRole(invitado);
-		userEmpleado.addRole(empleado);
-		this.userService.update(userEmpleado);
 		
-		userDueño.addRole(invitado);
-		userDueño.addRole(empleado);
-		userDueño.addRole(dueño);
-		this.userService.update(userDueño);
+// App
+		Topic topicA = this.topicservice.save(new Topic("topicA"));
+		Topic topicB = this.topicservice.save(new Topic("topicB"));
+		Topic topicC = this.topicservice.save(new Topic("topicC"));
 		
-		//this.roleService.delete(dueño);
+		this.postService.save(new Post(pepe, "primer post","descripcion de postA con topicA", topicA));
+		this.postService.save(new Post(pepe, "primer post","descripcion de postA con topicA", topicB));
+		this.postService.save(new Post(userInvitado, "primer post","descripcion de postA con topicA", topicC));
 		
 		} catch (ServiceException e) {
 			System.out.println("algo salio mal");
@@ -125,47 +157,6 @@ public class DefaultRestController {
 		return "<h3>Carga Inicial Completa</h3>";
 	}
 	
-	@RequestMapping(value = "/app", method = RequestMethod.GET)
-	public String testApp() {
-		try {
-			Topic topicA = this.topicservice.save(new Topic("topicA"));
-			Topic topicB = this.topicservice.save(new Topic("topicB"));
-			Topic topicC = this.topicservice.save(new Topic("topicC"));
-			
-			this.postService.save(new Post(null, "primer post","descripcion de postA con topicA", topicA));
-			this.postService.save(new Post(null, "primer post","descripcion de postA con topicA", topicB));
-			this.postService.save(new Post(null, "primer post","descripcion de postA con topicA", topicC));
-			
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-		return "home";
-	}
-	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test() {
-		try {
-			User pepe = this.userService.findByUser("due");
-			
-			if( pepe.isExistRole("invitado") )
-				System.out.println("el usuario tiene rol invitado");
-			if( pepe.isExistRole("dueño") )
-				System.out.println("el usuario tiene rol dueño");
-			
-			if( pepe.isExistPermit("product_show") )
-				System.out.println("el usuario tiene permiso product_show");
-			
-			if( pepe.isExistPermit("product_delete")  )
-				System.out.println("el usuario tiene permiso product_delete");
-			
-			this.userService.removeAllRoles(pepe);
-			
-			System.out.println(pepe);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-		return "<h3>Test Concluido </h3>";
-	}
 	
 	
 	

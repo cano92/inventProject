@@ -1,24 +1,4 @@
 .header-page{
-	margin:2em;
-}
-
-.loginForm{
-	margin-top: 2em;
-/* 	border-style: ridge; */
-	border-style: outset;
-	padding: 2em 2em 1.5em 2em;
-
-}
-
-.loginForm header {
-	margin-top:auto;
-	text-align: center;
-}
-
-.loginForm section{
-	margin-top:1em;
-}
-.loginForm footer{
-	margin-top:1em;
-/*  	margin-bottom:1px; */
+/* 	margin: 1.5em; */
+	margin: 15px;
 }

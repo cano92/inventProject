@@ -17,6 +17,7 @@ public class Role {
 	@Id @GeneratedValue
 	int id;
 	String name;
+	String description;
 	
 	//el dueño de la relacion es role_Permit
 	@OneToMany(mappedBy="role", cascade= {CascadeType.ALL}, fetch=FetchType.EAGER )
@@ -27,6 +28,10 @@ public class Role {
 
 	public Role(String name) {
 		this.name = name;
+	}
+	public Role(String name,String description) {
+		this.name = name;
+		this.description=description;
 	}
 	
 //	.. methods
@@ -59,7 +64,6 @@ public class Role {
 	public boolean isExistPermit(String permitName) {
 		return this.permits.stream().anyMatch(rolePermit->rolePermit.getPermit().getName().equals(permitName));
 	}
-	
 	
 	
 	@Override
@@ -113,6 +117,13 @@ public class Role {
 		this.permits = permits;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 
 }

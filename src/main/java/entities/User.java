@@ -63,6 +63,15 @@ public class User {
 	}
 
 //	.. Methods
+	public boolean isRoleAdmin() {
+		return this.isExistRole("admin");
+	}
+	public boolean isRoleUser() {
+		return this.isExistRole("user");
+	}
+	public boolean isRoleCustomizer() {
+		return false;
+	}
 	
 	public void addRole(Role role) {
 		this.getRoles().add(new User_Role(this, role));
@@ -97,6 +106,7 @@ public class User {
 	public boolean isExistPermit( String permitName) {
 		return this.getRoles().stream().anyMatch( userRole->userRole.getRole().isExistPermit(permitName) );
 	}
+	
 	
 //	.. Gets and Sets
 	

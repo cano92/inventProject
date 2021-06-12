@@ -1,21 +1,13 @@
-
-<!-- include head ( contiene librerias css y encabezados ) -->
-<%-- <%@ include file="template-parts/head.jsp"%> --%>
-<%@ include file="template-parts/header.jsp"%>
-
-<!-- contenido -->
-
-
-<!--  indicador de en que parte del menu estamos-->
-<div class="container px-lg-5">
-	<div class="row mx-lg-n5">
-		<div class="col py-3 px-lg-5">
-			<h4>Error</h4>
-		</div>
-	</div>
-</div>
+<%@ taglib prefix="rapid" uri="http://www.rapid-framework.org.cn/rapid"%>
 
 
 
-<!-- include footer jsp (incluye librerias js) -->
-<%@ include file="template-parts/footer.jsp"%>
+<rapid:override name="page-content">
+	<!-- ***************** CONTENIDO	**************************--->
+	<h4>Opss..! vuelva a intentarlo mas tarde </h4>
+
+</rapid:override>
+
+
+
+<%@ include file="template/clearTemplate.jsp"%>

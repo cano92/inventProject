@@ -33,6 +33,14 @@ public class UserService extends GenericService<User> implements IUserService {
 	}
 	
 	//>>>> add servicios no genericos
+	@Override
+	public User login(String user, String pass) throws ServiceException {
+		try {
+			return this.userDAO.login(user, pass);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e);
+		}
+	}
 	
 	public User addRole(User user, Role role ) throws ServiceException{
 		try { // si el Rol no existe lo crea por el cascade
