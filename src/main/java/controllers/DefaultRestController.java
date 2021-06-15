@@ -123,6 +123,7 @@ public class DefaultRestController {
 //	Gender
 		Gender masculino = this.genderService.save(new Gender("Masculino"));
 		Gender femenino = this.genderService.save(new Gender("Femenino"));
+		
 			
 // User
 		User pepe = userService.save(new User("pep","pep","pepe","pepe", 1234, "pepe@mail.com", LocalDate.of(1990, 1, 12), masculino));

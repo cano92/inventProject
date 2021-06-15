@@ -1,17 +1,21 @@
 package controllers;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
-import entities.User;
+
 import services.IUserService;
-import util.exception.ServiceException;
+import util.model.UserForm;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -43,14 +47,21 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/registerUser", method = RequestMethod.GET)
-	public String userFormShow( ) {
-		
+	public String userFormShow( Model model) {
+		UserForm userForm = new UserForm();
+		model.addAttribute("userForm",userForm);
 		return "userForm-show";
 	}
 	
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-	public String registerUser( ) {
+	public String registerUser(@Valid @ModelAttribute("userForm") UserForm userForm, 
+			BindingResult validationResult ) {
+		if(validationResult.hasErrors() ) {
+			return "userForm-show";
+		}//paso la validadion
+		//agregar el nuevo usuario 
 		
+		//ir a pagina de confirmacion de que se agrego el nuevo usuario
 		return "userForm-show";
 	}
 }

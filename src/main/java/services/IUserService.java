@@ -21,4 +21,8 @@ public interface IUserService extends IGenericService<User>{
 	
 	public void removeAllRoles(User user) throws ServiceException;
 	
+	public boolean isExistMail(String mail)throws ServiceException;
+	
+	public boolean isExistUser(String user)throws ServiceException;
+	
 }

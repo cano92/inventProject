@@ -35,10 +35,10 @@ public class GenericDAO<T> implements IGenericDAO<T> {
 	 * el campo de la tabla en la que busca es "fieldName"
 	 * */
 	@Override
-	public boolean isExistFieldName(String fieldName, String findName) throws PersistenceException{
+	public boolean isExistFieldName(String fieldName, String findString) throws PersistenceException{
 		try{ //example UserHql ="from User as us where us.firtsName=:UserName";
 			
-			String hql="from "+this.getEntityName()+" as Entity where Entity."+fieldName+"='"+findName+"'";
+			String hql="from "+this.getEntityName()+" as Entity where Entity."+fieldName+"='"+findString+"'";
 	
 			List<T> list=this.getEntityManager().createQuery(hql,this.getPersistentClass())
 					.setMaxResults(1)

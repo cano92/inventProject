@@ -109,4 +109,22 @@ public class UserService extends GenericService<User> implements IUserService {
 		}
 	}
 
+	@Override
+	public boolean isExistMail(String mail) throws ServiceException {
+		try {
+			return this.userDAO.isExistFieldName("mail", mail);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public boolean isExistUser(String user) throws ServiceException {
+		try {
+			return this.userDAO.isExistFieldName("user", user);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e);
+		}
+	}
+
 }

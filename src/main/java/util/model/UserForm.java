@@ -6,34 +6,47 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import util.customValidation.MailNotRepeat;
+import util.customValidation.UserNameNotRepeat;
 
 public class UserForm {
 
 	@NotBlank
+	@Size(min=3, message = "*debe tener 3 o mas caracteres")
+	@UserNameNotRepeat	//custom Validation
 	String user;
 	
 	@NotBlank
+	@Size(min=3, message = "*debe tener 3 o mas caracteres")
 	String password;
 
 	@NotBlank
+	@Size(min=3, message = "*debe tener 3 o mas caracteres")
 	String firtsName;
 	
 	@NotBlank
+	@Size(min=3, message = "*debe tener 3 o mas caracteres")
 	String lastName;
 	
-	@NotBlank
 	@Positive
 	int dni;
 	
-	@NotBlank
-	@Email 
+	@Email
+	@MailNotRepeat //custom Validation
 	String mail;
 	
-	@NotBlank
+	String direction;
+	
+	//importante para que la fecha sea Parseada correctamente se debe usar la anotacion @DateTimeFormat
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Past //valida que la fecha sea del pasado
 	LocalDate dateOfBirth;
 	
-	@NotBlank
+	@Positive
 	int genderId; //id de genero registrado
 	
 	
@@ -75,5 +88,34 @@ public class UserForm {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+//	public Optional<@Past LocalDate> getDateOfBirth() {
+//	    return Optional.of(dateOfBirth);
+//	}
+
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public int getGenderId() {
+		return genderId;
+	}
+
+	public void setGenderId(int genderId) {
+		this.genderId = genderId;
+	}
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+	
+	
 	
 }
